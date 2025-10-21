@@ -5,6 +5,7 @@ from settings import *
 from game_logic.patient import Patient
 from ui.button import Button
 from scenes.fail_scene import FailScene
+from scenes.result_scene import ResultScene
 
 class SpeechBubble:
     def __init__(self, x, y, width, height, font):
@@ -39,11 +40,19 @@ class GameScene(Scene):
     def __init__(self, game):
         super().__init__(game, background_image=pygame.image.load('images/patient_background.png'))
         self.buttons = []
+        self.score = 0
+        self.case_count = 0
+        self.total_cases = 10
         self._prepare_new_patient()
         self.speech_bubble = SpeechBubble(350, 60, 350, 120, self.small_font)
-        self.score = 0
-    
+
     def _prepare_new_patient(self):
+        if self.case_count >= self.total_cases:
+            if self.score >= 7:
+                self.game.change_scene(lambda game: SuccessScene(game, self.score, self.total_cases))
+            else:
+                self.game.change_scene(lambda game: FailScene(game, self.score, self.total_cases))
+            return
         self.patient = Patient()
         self.stage = 'disease'
         self.selected_option = None
@@ -79,14 +88,14 @@ class GameScene(Scene):
                 self.selected_option = None
                 self.create_buttons()
             else:
-                self.game.change_scene(lambda game: FailScene(game, message="Incorrect disease!"))
+                self.case_count += 1
+                self._prepare_new_patient()
         elif self.stage == 'treatment':
             self.selected_treatment = idx
             if idx == self.patient.correct_treatment_index:
                 self.score += 1
-                self._prepare_new_patient()
-            else:
-                self.game.change_scene(lambda game: FailScene(game, message="Incorrect treatment!"))
+            self.case_count += 1
+            self._prepare_new_patient()
 
     def handle_events(self, events):
         for event in events:
