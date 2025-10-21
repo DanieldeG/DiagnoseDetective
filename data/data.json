@@ -1,0 +1,37 @@
+[
+  {
+    "symptoms": ["High fever", "Chills", "Sweating", "Muscle aches", "Fatigue"],
+    "diseases": ["Influenza", "Common Cold", "COVID-19", "Pneumonia"],
+    "correct_disease": 0,
+    "treatments": ["Rest and fluids", "Antiviral medication", "Antibiotics", "Oxygen therapy"],
+    "correct_treatment": 1
+  },
+  {
+    "symptoms": ["Frequent urination", "Extreme thirst", "Increased hunger", "Unexplained weight loss"],
+    "diseases": ["Type 1 Diabetes", "Type 2 Diabetes", "Hyperthyroidism", "Cushing's Syndrome"],
+    "correct_disease": 0,
+    "treatments": ["Insulin therapy", "Lifestyle changes", "Antithyroid medication", "Corticosteroids"],
+    "correct_treatment": 0
+  },
+  {
+    "symptoms": ["Sudden chest pain", "Shortness of breath", "Sweating", "Nausea"],
+    "diseases": ["Heartburn", "Heart Attack", "Panic Attack", "Pulmonary Embolism"],
+    "correct_disease": 1,
+    "treatments": ["Antacids", "Emergency cardiac care", "Anti-anxiety medication", "Blood thinners"],
+    "correct_treatment": 1
+  },
+  {
+    "symptoms": ["Severe headache", "Stiff neck", "Fever", "Nausea", "Sensitivity to light"],
+    "diseases": ["Migraine", "Meningitis", "Flu", "Tension Headache"],
+    "correct_disease": 1,
+    "treatments": ["Painkillers", "Immediate antibiotics", "Fluids and rest", "Anti-inflammatory drugs"],
+    "correct_treatment": 1
+  },
+  {
+    "symptoms": ["Persistent cough producing yellow/green mucus", "Fever", "Shortness of breath", "Chest discomfort"],
+    "diseases": ["Asthma", "Bronchitis", "Pneumonia", "Common Cold"],
+    "correct_disease": 2,
+    "treatments": ["Inhaler", "Rest and fluids", "Antibiotics", "Antihistamines"],
+    "correct_treatment": 2
+  }
+]
