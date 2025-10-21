@@ -5,7 +5,7 @@ from settings import *
 from game_logic.patient import Patient
 from ui.button import Button
 from scenes.fail_scene import FailScene
-from scenes.result_scene import ResultScene
+from scenes.succes_scene import SuccessScene
 
 class SpeechBubble:
     def __init__(self, x, y, width, height, font):
@@ -112,6 +112,10 @@ class GameScene(Scene):
         score_text = self.font.render(f"Score: {self.score}", True, (60, 60, 60))
         screen.blit(score_text, (SCREEN_WIDTH - 150, 20))
 
+        # Draw the case number
+        case_text = self.font.render(f"Case: {self.case_count + 1}/{self.total_cases}", True, (60, 60, 60))
+        screen.blit(case_text, (20, 20))
+
         # Draw speech bubble for symptoms
         symptoms_text = "I am feeling: " + ", ".join(self.patient.symptoms)
         self.speech_bubble.draw(screen, symptoms_text)
@@ -129,4 +133,4 @@ class GameScene(Scene):
             instr = self.font.render("Click on the disease you think matches the patient's symptoms!", True, (60, 60, 60))
         else:
             instr = self.font.render("Now choose the best treatment for this patient!", True, (60, 60, 60))
-        screen.blit(instr, (380, 235))
+        screen.blit(instr, (280, 200))
