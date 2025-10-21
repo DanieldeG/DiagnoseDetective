@@ -1,7 +1,14 @@
-# scenes/base_scene.py
+import pygame
+from settings import *
+
 class Scene:
-    def __init__(self, game):
+    def __init__(self, game, background_color=WHITE, background_image=None):
         self.game = game
+        self.background_color = background_color
+        self.background_image = background_image
+        self.background_image = pygame.transform.scale(self.background_image, (SCREEN_WIDTH, SCREEN_HEIGHT)) if background_image else None
+        self.font = pygame.font.Font(FONT_NAME, FONT_SIZE + 10)
+        self.large_font = pygame.font.Font(FONT_NAME, FONT_SIZE + 8)
 
     def handle_events(self, events):
         pass
@@ -10,4 +17,8 @@ class Scene:
         pass
 
     def render(self, screen):
-        pass
+        if self.background_image:
+            
+            screen.blit(self.background_image, (0, 0))
+        else:
+            screen.fill(self.background_color)

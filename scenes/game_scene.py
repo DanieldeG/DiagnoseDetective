@@ -39,13 +39,11 @@ class SpeechBubble:
 
 class GameScene(Scene):
     def __init__(self, game):
-        super().__init__(game)
+        super().__init__(game, background_color=LIGHT_BLUE)
         self.patient = Patient()
         self.selected_option = None
         self.selected_treatment = None
         self.stage = 'disease'  # 'disease' or 'treatment'
-        self.font = pygame.font.Font(FONT_NAME, FONT_SIZE)
-        self.large_font = pygame.font.Font(FONT_NAME, FONT_SIZE + 8)
         self.speech_bubble = SpeechBubble(200, 100, 500, 120, self.font)
         self.buttons = []
         self.create_buttons()
@@ -99,7 +97,8 @@ class GameScene(Scene):
         pass
 
     def render(self, screen):
-        screen.fill(WHITE)
+        super().render(screen)
+
         # Draw patient avatar (simple circle for now)
         avatar_center = (120, 180)
         pygame.draw.circle(screen, (200, 170, 140), avatar_center, 60)
