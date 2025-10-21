@@ -4,6 +4,7 @@ from scenes.base_scene import Scene
 from settings import *
 from game_logic.patient import Patient
 from ui.button import Button
+from scenes.fail_scene import FailScene
 
 class SpeechBubble:
     def __init__(self, x, y, width, height, font):
@@ -41,6 +42,8 @@ class GameScene(Scene):
         super().__init__(game)
         self.patient = Patient()
         self.selected_option = None
+        self.selected_treatment = None
+        self.stage = 'disease'  # 'disease' or 'treatment'
         self.font = pygame.font.Font(FONT_NAME, FONT_SIZE)
         self.large_font = pygame.font.Font(FONT_NAME, FONT_SIZE + 8)
         self.speech_bubble = SpeechBubble(200, 100, 500, 120, self.font)
@@ -54,7 +57,8 @@ class GameScene(Scene):
         button_w = 320
         button_h = 50
         gap = 18
-        for idx, option in enumerate(self.patient.options):
+        options = self.patient.options if self.stage == 'disease' else self.patient.get_treatment_options()
+        for idx, option in enumerate(options):
             def make_callback(i=idx):
                 return lambda: self.select_option(i)
             btn = Button(
@@ -68,9 +72,23 @@ class GameScene(Scene):
             self.buttons.append(btn)
 
     def select_option(self, idx):
-        self.selected_option = idx
-        if self.patient.check_disease_choice(idx):
-            print("Correct choice!")
+        if self.stage == 'disease':
+            self.selected_option = idx
+            if self.patient.check_disease_choice(idx):
+                self.stage = 'treatment'
+                self.selected_option = None
+                self.create_buttons()
+            else:
+                from scenes.fail_scene import FailScene
+                self.game.change_scene(lambda game: FailScene(game, message="Incorrect disease!"))
+        elif self.stage == 'treatment':
+            self.selected_treatment = idx
+            if idx == self.patient.correct_treatment_index:
+                print("Correct treatment!")
+                # You can add win logic or next patient logic here
+            else:
+                from scenes.fail_scene import FailScene
+                self.game.change_scene(lambda game: FailScene(game, message="Incorrect treatment!"))
 
     def handle_events(self, events):
         for event in events:
@@ -78,7 +96,6 @@ class GameScene(Scene):
                 btn.handle_event(event)
 
     def update(self, dt):
-        # ...existing code...
         pass
 
     def render(self, screen):
@@ -96,11 +113,17 @@ class GameScene(Scene):
         symptoms_text = "I am feeling: " + ", ".join(self.patient.symptoms)
         self.speech_bubble.draw(screen, symptoms_text)
 
-        # Draw disease options as buttons
+        # Draw options as buttons
         for idx, btn in enumerate(self.buttons):
-            btn.color = (180, 220, 180) if self.selected_option == idx else BLUE
+            if self.stage == 'disease':
+                btn.color = (180, 220, 180) if self.selected_option == idx else BLUE
+            else:
+                btn.color = (180, 180, 220) if self.selected_treatment == idx else GREEN
             btn.draw(screen)
 
         # Instructions
-        instr = self.font.render("Click on the disease you think matches the patient's symptoms!", True, (60, 60, 60))
+        if self.stage == 'disease':
+            instr = self.font.render("Click on the disease you think matches the patient's symptoms!", True, (60, 60, 60))
+        else:
+            instr = self.font.render("Now choose the best treatment for this patient!", True, (60, 60, 60))
         screen.blit(instr, (380, 235))
