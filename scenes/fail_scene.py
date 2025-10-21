@@ -1,5 +1,3 @@
-# scenes/fail_scene.py
-import pygame
 from scenes.base_scene import Scene
 from ui.button import Button
 from settings import *
@@ -22,6 +20,7 @@ class FailScene(Scene):
         pass
 
     def render(self, screen):
+        super().render(screen)
         text_surface = self.font.render(self.message, True, WHITE)
         text_rect = text_surface.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2 - 40))
         screen.blit(text_surface, text_rect)

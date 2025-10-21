@@ -3,13 +3,13 @@ import pygame
 from settings import *
 
 class Button:
-    def __init__(self, text, x, y, callback, width=200, height=50):
+    def __init__(self, text, x, y, callback, width=200, height=50, color=BLUE):
         self.text = text
         self.rect = pygame.Rect(0, 0, width, height)
         self.rect.center = (x, y)
         self.callback = callback
-        self.font = pygame.font.Font(FONT_NAME, FONT_SIZE)
-        self.color = BLUE
+        self.font = pygame.font.Font(FONT_NAME, STANDARD_FONT_SIZE)
+        self.color = color
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)

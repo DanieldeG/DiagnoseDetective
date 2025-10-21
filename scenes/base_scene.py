@@ -7,8 +7,9 @@ class Scene:
         self.background_color = background_color
         self.background_image = background_image
         self.background_image = pygame.transform.scale(self.background_image, (SCREEN_WIDTH, SCREEN_HEIGHT)) if background_image else None
-        self.font = pygame.font.Font(FONT_NAME, FONT_SIZE + 10)
-        self.large_font = pygame.font.Font(FONT_NAME, FONT_SIZE + 8)
+        self.small_font = pygame.font.Font(FONT_NAME, SMALL_FONT_SIZE)
+        self.font = pygame.font.Font(FONT_NAME, STANDARD_FONT_SIZE)
+        self.large_font = pygame.font.Font(FONT_NAME, LARGE_FONT_SIZE)
 
     def handle_events(self, events):
         pass
@@ -18,7 +19,6 @@ class Scene:
 
     def render(self, screen):
         if self.background_image:
-            
             screen.blit(self.background_image, (0, 0))
         else:
             screen.fill(self.background_color)

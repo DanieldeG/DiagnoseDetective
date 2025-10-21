@@ -15,12 +15,10 @@ class SpeechBubble:
         self.text_color = (40, 40, 80)
 
     def draw(self, screen, text):
-        pygame.draw.rect(screen, self.bg_color, self.rect, border_radius=20)
-        pygame.draw.rect(screen, self.border_color, self.rect, 2, border_radius=20)
         wrapped = self.wrap_text(text, self.font, self.rect.width - 20)
         for i, line in enumerate(wrapped):
             text_surface = self.font.render(line, True, self.text_color)
-            screen.blit(text_surface, (self.rect.x + 10, self.rect.y + 15 + i * (FONT_SIZE + 2)))
+            screen.blit(text_surface, (self.rect.x + 10, self.rect.y + 15 + i * (SMALL_FONT_SIZE + 2)))
 
     def wrap_text(self, text, font, max_width):
         words = text.split(' ')
@@ -39,18 +37,22 @@ class SpeechBubble:
 
 class GameScene(Scene):
     def __init__(self, game):
-        super().__init__(game, background_color=LIGHT_BLUE)
+        super().__init__(game, background_image=pygame.image.load('images/patient_background.png'))
+        self.buttons = []
+        self._prepare_new_patient()
+        self.speech_bubble = SpeechBubble(350, 60, 350, 120, self.small_font)
+        self.score = 0
+    
+    def _prepare_new_patient(self):
         self.patient = Patient()
+        self.stage = 'disease'
         self.selected_option = None
         self.selected_treatment = None
-        self.stage = 'disease'  # 'disease' or 'treatment'
-        self.speech_bubble = SpeechBubble(200, 100, 500, 120, self.font)
-        self.buttons = []
         self.create_buttons()
 
     def create_buttons(self):
         self.buttons = []
-        start_x = 380
+        start_x = SCREEN_WIDTH // 2
         start_y = 275
         button_w = 320
         button_h = 50
@@ -77,15 +79,13 @@ class GameScene(Scene):
                 self.selected_option = None
                 self.create_buttons()
             else:
-                from scenes.fail_scene import FailScene
                 self.game.change_scene(lambda game: FailScene(game, message="Incorrect disease!"))
         elif self.stage == 'treatment':
             self.selected_treatment = idx
             if idx == self.patient.correct_treatment_index:
-                print("Correct treatment!")
-                # You can add win logic or next patient logic here
+                self.score += 1
+                self._prepare_new_patient()
             else:
-                from scenes.fail_scene import FailScene
                 self.game.change_scene(lambda game: FailScene(game, message="Incorrect treatment!"))
 
     def handle_events(self, events):
@@ -99,14 +99,9 @@ class GameScene(Scene):
     def render(self, screen):
         super().render(screen)
 
-        # Draw patient avatar (simple circle for now)
-        avatar_center = (120, 180)
-        pygame.draw.circle(screen, (200, 170, 140), avatar_center, 60)
-        pygame.draw.circle(screen, (0, 0, 0), avatar_center, 60, 2)
-        # Draw face features
-        pygame.draw.circle(screen, (0, 0, 0), (avatar_center[0]-20, avatar_center[1]-10), 8)  # left eye
-        pygame.draw.circle(screen, (0, 0, 0), (avatar_center[0]+20, avatar_center[1]-10), 8)  # right eye
-        pygame.draw.arc(screen, (0, 0, 0), (avatar_center[0]-20, avatar_center[1]+10, 40, 20), 3.14, 0, 2)  # smile
+        # Draw the score
+        score_text = self.font.render(f"Score: {self.score}", True, (60, 60, 60))
+        screen.blit(score_text, (SCREEN_WIDTH - 150, 20))
 
         # Draw speech bubble for symptoms
         symptoms_text = "I am feeling: " + ", ".join(self.patient.symptoms)
