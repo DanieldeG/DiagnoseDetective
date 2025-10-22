@@ -62,7 +62,7 @@ class GameScene(Scene):
     def create_buttons(self):
         self.buttons = []
         start_x = SCREEN_WIDTH // 2
-        start_y = 275
+        start_y = 300
         button_w = 320
         button_h = 50
         gap = 18
@@ -130,7 +130,17 @@ class GameScene(Scene):
 
         # Instructions
         if self.stage == 'disease':
-            instr = self.font.render("Click on the disease you think matches the patient's symptoms!", True, (60, 60, 60))
+            lines = [
+                "Click on the disease you think",
+                "matches the patient's symptoms!"
+            ]
         else:
-            instr = self.font.render("Now choose the best treatment for this patient!", True, (60, 60, 60))
-        screen.blit(instr, (280, 200))
+            lines = [
+                "Now choose the best treatment",
+                "for this patient!"
+            ]
+        line_spacing = self.font.get_linesize() + 4
+        for i, line in enumerate(lines):
+            instr_surf = self.font.render(line, True, (60, 60, 60))
+            screen.blit(instr_surf, (300, 200 + i * line_spacing))
+# ...existing code...
