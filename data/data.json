@@ -1,37 +1,323 @@
-[
-  {
-    "symptoms": ["High fever", "Chills", "Sweating", "Muscle aches", "Fatigue"],
-    "diseases": ["Influenza", "Common Cold", "COVID-19", "Pneumonia"],
-    "correct_disease": 0,
-    "treatments": ["Rest and fluids", "Antiviral medication", "Antibiotics", "Oxygen therapy"],
-    "correct_treatment": 1
-  },
-  {
-    "symptoms": ["Frequent urination", "Extreme thirst", "Increased hunger", "Unexplained weight loss"],
-    "diseases": ["Type 1 Diabetes", "Type 2 Diabetes", "Hyperthyroidism", "Cushing's Syndrome"],
-    "correct_disease": 0,
-    "treatments": ["Insulin therapy", "Lifestyle changes", "Antithyroid medication", "Corticosteroids"],
-    "correct_treatment": 0
-  },
-  {
-    "symptoms": ["Sudden chest pain", "Shortness of breath", "Sweating", "Nausea"],
-    "diseases": ["Heartburn", "Heart Attack", "Panic Attack", "Pulmonary Embolism"],
-    "correct_disease": 1,
-    "treatments": ["Antacids", "Emergency cardiac care", "Anti-anxiety medication", "Blood thinners"],
-    "correct_treatment": 1
-  },
-  {
-    "symptoms": ["Severe headache", "Stiff neck", "Fever", "Nausea", "Sensitivity to light"],
-    "diseases": ["Migraine", "Meningitis", "Flu", "Tension Headache"],
-    "correct_disease": 1,
-    "treatments": ["Painkillers", "Immediate antibiotics", "Fluids and rest", "Anti-inflammatory drugs"],
-    "correct_treatment": 1
-  },
-  {
-    "symptoms": ["Persistent cough producing yellow/green mucus", "Fever", "Shortness of breath", "Chest discomfort"],
-    "diseases": ["Asthma", "Bronchitis", "Pneumonia", "Common Cold"],
-    "correct_disease": 2,
-    "treatments": ["Inhaler", "Rest and fluids", "Antibiotics", "Antihistamines"],
-    "correct_treatment": 2
-  }
-]
+{
+  "easy": [
+    {
+      "symptoms": ["Runny nose", "Sneezing", "Mild sore throat", "Cough"],
+      "diseases": ["Common Cold", "Allergies", "Flu", "Sinus Infection"],
+      "correct_disease": 0,
+      "treatments": ["Rest and fluids", "Antihistamines", "Antivirals", "Antibiotics"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Mild fever", "Itchy rash", "Fatigue", "Loss of appetite"],
+      "diseases": ["Chickenpox", "Measles", "Shingles", "Eczema"],
+      "correct_disease": 0,
+      "treatments": ["Antihistamines", "Calamine lotion and rest", "Antibiotics", "Steroid cream"],
+      "correct_treatment": 1
+    },
+    {
+      "symptoms": ["Toothache", "Swelling in jaw", "Pain while chewing"],
+      "diseases": ["Cavity", "Gum Infection", "Tooth abscess", "Sinus Infection"],
+      "correct_disease": 2,
+      "treatments": ["Antibiotics and drainage", "Painkillers", "Saltwater rinse", "Surgery"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Itchy, red eyes", "Watery discharge", "Gritty feeling in eyes"],
+      "diseases": ["Conjunctivitis", "Allergic reaction", "Dry eye syndrome", "Blepharitis"],
+      "correct_disease": 0,
+      "treatments": ["Antibiotic drops", "Cold compress", "Lubricant drops", "Antihistamine drops"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Sore throat", "Difficulty swallowing", "Mild fever"],
+      "diseases": ["Pharyngitis", "Laryngitis", "Tonsillitis", "Common Cold"],
+      "correct_disease": 2,
+      "treatments": ["Saltwater gargle", "Antibiotics", "Pain relief", "Rest"],
+      "correct_treatment": 1
+    },
+    {
+      "symptoms": ["Nausea", "Vomiting", "Stomach pain", "Diarrhea"],
+      "diseases": ["Food Poisoning", "Gastritis", "Ulcer", "Appendicitis"],
+      "correct_disease": 0,
+      "treatments": ["Hydration and rest", "Antibiotics", "Surgery", "Antacids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Cough", "Runny nose", "Mild fever", "Fatigue"],
+      "diseases": ["Flu", "Common Cold", "Bronchitis", "Allergies"],
+      "correct_disease": 1,
+      "treatments": ["Rest and fluids", "Antibiotics", "Inhaler", "Antivirals"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Headache", "Pressure in forehead", "Nasal congestion"],
+      "diseases": ["Migraine", "Sinusitis", "Tension headache", "Flu"],
+      "correct_disease": 1,
+      "treatments": ["Decongestants", "Painkillers", "Antibiotics", "Antihistamines"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Ear pain", "Fever", "Hearing difficulty"],
+      "diseases": ["Ear infection", "Tinnitus", "Sinus infection", "Allergy"],
+      "correct_disease": 0,
+      "treatments": ["Antibiotic drops", "Antihistamines", "Painkillers", "Steroid spray"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Burning sensation while urinating", "Lower abdominal pain"],
+      "diseases": ["Kidney stones", "Bladder infection", "UTI", "Appendicitis"],
+      "correct_disease": 2,
+      "treatments": ["Antibiotics", "Painkillers", "Surgery", "Hydration only"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Itchy scalp", "Flakes on hair", "Mild redness"],
+      "diseases": ["Dandruff", "Psoriasis", "Eczema", "Lice infestation"],
+      "correct_disease": 0,
+      "treatments": ["Medicated shampoo", "Steroid cream", "Antihistamines", "Antibiotics"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Pain when swallowing", "Hoarse voice", "Dry throat"],
+      "diseases": ["Laryngitis", "Pharyngitis", "Tonsillitis", "Cold"],
+      "correct_disease": 0,
+      "treatments": ["Voice rest", "Warm fluids", "Antibiotics", "Steroids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Sneezing", "Itchy nose", "Watery eyes", "Runny nose"],
+      "diseases": ["Allergic rhinitis", "Common Cold", "Sinusitis", "Flu"],
+      "correct_disease": 0,
+      "treatments": ["Antihistamines", "Decongestants", "Antibiotics", "Steroids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Rash between toes", "Itching", "Flaking skin"],
+      "diseases": ["Athlete’s foot", "Eczema", "Psoriasis", "Cellulitis"],
+      "correct_disease": 0,
+      "treatments": ["Antifungal cream", "Steroid cream", "Antibiotics", "Moisturizer"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Cough", "Sore throat", "Hoarse voice"],
+      "diseases": ["Laryngitis", "Bronchitis", "Cold", "Asthma"],
+      "correct_disease": 0,
+      "treatments": ["Voice rest", "Warm fluids", "Antibiotics", "Inhaler"],
+      "correct_treatment": 0
+    }
+  ],
+  "medium": [
+    {
+      "symptoms": ["Abdominal pain", "Bloating", "Diarrhea after dairy intake"],
+      "diseases": ["IBS", "Lactose Intolerance", "Food Poisoning", "Celiac Disease"],
+      "correct_disease": 1,
+      "treatments": ["Avoid dairy", "Antibiotics", "Probiotics", "Gluten-free diet"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Shortness of breath", "Wheezing", "Chest tightness"],
+      "diseases": ["Asthma", "Bronchitis", "COPD", "Pneumonia"],
+      "correct_disease": 0,
+      "treatments": ["Inhaler and corticosteroids", "Antibiotics", "Rest", "Oxygen therapy"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Painful urination", "Frequent urge to urinate", "Cloudy urine"],
+      "diseases": ["Kidney Stones", "Bladder Infection", "Prostatitis", "UTI"],
+      "correct_disease": 3,
+      "treatments": ["Antibiotics", "Hydration", "Painkillers", "Surgery"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Swelling in ankles", "Shortness of breath", "Fatigue"],
+      "diseases": ["Heart Failure", "Kidney Failure", "Anemia", "Dehydration"],
+      "correct_disease": 0,
+      "treatments": ["Diuretics", "Iron supplements", "Dialysis", "Blood transfusion"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Persistent sadness", "Loss of interest", "Sleep disturbance"],
+      "diseases": ["Anxiety", "Bipolar Disorder", "Depression", "Insomnia"],
+      "correct_disease": 2,
+      "treatments": ["Antidepressants and therapy", "Sedatives", "Lifestyle changes", "Meditation only"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Fatigue", "Cold intolerance", "Weight gain", "Dry skin"],
+      "diseases": ["Hyperthyroidism", "Hypothyroidism", "Anemia", "Cushing’s Syndrome"],
+      "correct_disease": 1,
+      "treatments": ["Thyroid hormone replacement", "Antithyroid drugs", "Iron supplements", "Steroids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Joint pain", "Swelling", "Stiffness in the morning"],
+      "diseases": ["Osteoarthritis", "Gout", "Rheumatoid Arthritis", "Lupus"],
+      "correct_disease": 2,
+      "treatments": ["Anti-inflammatory drugs", "Steroids", "Surgery", "Physical therapy"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Blurred vision", "Frequent urination", "Increased thirst"],
+      "diseases": ["Type 1 Diabetes", "Type 2 Diabetes", "Hyperthyroidism", "Cushing’s Syndrome"],
+      "correct_disease": 1,
+      "treatments": ["Lifestyle changes and medication", "Insulin therapy", "Antithyroid drugs", "Steroids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Sharp lower right abdominal pain", "Nausea", "Loss of appetite"],
+      "diseases": ["Appendicitis", "Ulcer", "Gastritis", "Gallstones"],
+      "correct_disease": 0,
+      "treatments": ["Surgery", "Painkillers", "Antibiotics", "Antacids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Severe sore throat", "Swollen lymph nodes", "White patches on tonsils"],
+      "diseases": ["Pharyngitis", "Tonsillitis", "Laryngitis", "Mono"],
+      "correct_disease": 1,
+      "treatments": ["Antibiotics", "Painkillers", "Rest and fluids", "Antivirals"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Pain in upper abdomen after eating", "Bloating", "Burping"],
+      "diseases": ["Ulcer", "Gastritis", "GERD", "Gallstones"],
+      "correct_disease": 1,
+      "treatments": ["Antacids and proton pump inhibitors", "Surgery", "Antibiotics", "Steroids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Frequent headaches", "Tight band around head", "Stress"],
+      "diseases": ["Tension headache", "Migraine", "Cluster headache", "Sinusitis"],
+      "correct_disease": 0,
+      "treatments": ["Relaxation and pain relief", "Antibiotics", "Steroids", "Surgery"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Yellow skin", "Fatigue", "Dark urine"],
+      "diseases": ["Hepatitis A", "Hepatitis B", "Jaundice", "Gallstones"],
+      "correct_disease": 2,
+      "treatments": ["Rest and fluids", "Antivirals", "Surgery", "Steroids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Severe cramps during menstruation", "Lower back pain"],
+      "diseases": ["Endometriosis", "Dysmenorrhea", "Fibroids", "UTI"],
+      "correct_disease": 1,
+      "treatments": ["Painkillers and rest", "Hormonal therapy", "Surgery", "Antibiotics"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Shortness of breath", "Fatigue", "Pale skin"],
+      "diseases": ["Anemia", "Asthma", "Heart Failure", "Anorexia"],
+      "correct_disease": 0,
+      "treatments": ["Iron supplements", "Oxygen therapy", "Steroids", "Diet changes"],
+      "correct_treatment": 0
+    }
+  ],
+  "hard": [
+    {
+      "symptoms": ["Severe upper abdominal pain radiating to back", "Nausea", "Vomiting after eating fatty food"],
+      "diseases": ["Gastritis", "Pancreatitis", "Gallstones", "Ulcer"],
+      "correct_disease": 2,
+      "treatments": ["Surgery (cholecystectomy)", "Antacids", "Antibiotics", "Painkillers only"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Tremor at rest", "Slow movements", "Stiffness", "Balance problems"],
+      "diseases": ["Multiple Sclerosis", "Parkinson’s Disease", "Stroke", "ALS"],
+      "correct_disease": 1,
+      "treatments": ["Levodopa medication", "Physical therapy", "Antidepressants", "Surgery"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Chronic cough", "Unintentional weight loss", "Night sweats", "Fever"],
+      "diseases": ["Lung Cancer", "Tuberculosis", "COPD", "Pneumonia"],
+      "correct_disease": 1,
+      "treatments": ["Antibiotics", "Antitubercular therapy", "Chemotherapy", "Oxygen therapy"],
+      "correct_treatment": 1
+    },
+    {
+      "symptoms": ["Severe joint pain", "Swelling", "Morning stiffness", "Fatigue"],
+      "diseases": ["Osteoarthritis", "Gout", "Rheumatoid Arthritis", "Lupus"],
+      "correct_disease": 2,
+      "treatments": ["Anti-inflammatory drugs", "Steroid therapy", "Joint replacement", "Uric acid reducers"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Sudden weakness on one side", "Difficulty speaking", "Loss of coordination"],
+      "diseases": ["Stroke", "Epilepsy", "Brain Tumor", "Migraine"],
+      "correct_disease": 0,
+      "treatments": ["Immediate clot-busting medication", "Anti-seizure drugs", "Surgery", "Painkillers"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Abdominal swelling", "Jaundice", "Fatigue", "Easy bruising"],
+      "diseases": ["Liver Cirrhosis", "Hepatitis B", "Gallstones", "Pancreatitis"],
+      "correct_disease": 0,
+      "treatments": ["Lifestyle changes and medication", "Antiviral drugs", "Surgery", "Painkillers"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Persistent cough with blood", "Chest pain", "Weight loss"],
+      "diseases": ["Bronchitis", "Lung Cancer", "Pneumonia", "Tuberculosis"],
+      "correct_disease": 1,
+      "treatments": ["Chemotherapy and radiation", "Antibiotics", "Oxygen therapy", "Cough suppressants"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Memory loss", "Difficulty completing tasks", "Confusion"],
+      "diseases": ["Alzheimer’s Disease", "Stroke", "Parkinson’s Disease", "Depression"],
+      "correct_disease": 0,
+      "treatments": ["Cognitive therapy and medication", "Surgery", "Antidepressants", "Physical therapy"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Chest pain", "Shortness of breath", "Rapid heartbeat", "Coughing blood"],
+      "diseases": ["Heart Attack", "Pulmonary Embolism", "Pneumonia", "Asthma"],
+      "correct_disease": 1,
+      "treatments": ["Blood thinners", "Antibiotics", "Oxygen therapy", "Antacids"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Extreme thirst", "Frequent urination", "Ketoacidosis"],
+      "diseases": ["Type 1 Diabetes", "Type 2 Diabetes", "Hypoglycemia", "Dehydration"],
+      "correct_disease": 0,
+      "treatments": ["Insulin therapy", "Lifestyle changes", "Sugar intake", "Hydration"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Vision loss", "Eye pain", "Halos around lights"],
+      "diseases": ["Cataract", "Glaucoma", "Macular degeneration", "Retinal detachment"],
+      "correct_disease": 1,
+      "treatments": ["Eye pressure-lowering medication", "Surgery", "Laser therapy", "Antibiotics"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Severe headache", "Neck stiffness", "Fever", "Nausea"],
+      "diseases": ["Migraine", "Meningitis", "Sinusitis", "Flu"],
+      "correct_disease": 1,
+      "treatments": ["Immediate antibiotics", "Painkillers", "Antivirals", "Rest only"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Chest pain radiating to arm", "Sweating", "Nausea"],
+      "diseases": ["Heart Attack", "Angina", "Anxiety", "Pneumonia"],
+      "correct_disease": 0,
+      "treatments": ["Aspirin and emergency care", "Antibiotics", "Painkillers", "Sedatives"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Weight loss", "Tremors", "Increased appetite", "Sweating"],
+      "diseases": ["Hyperthyroidism", "Hypothyroidism", "Cushing’s Syndrome", "Diabetes"],
+      "correct_disease": 0,
+      "treatments": ["Antithyroid medication", "Steroids", "Insulin", "Thyroid hormone"],
+      "correct_treatment": 0
+    },
+    {
+      "symptoms": ["Chronic fatigue", "Muscle pain", "Sleep disturbance", "Brain fog"],
+      "diseases": ["Fibromyalgia", "Chronic Fatigue Syndrome", "Depression", "Hypothyroidism"],
+      "correct_disease": 0,
+      "treatments": ["Physical therapy and pain management", "Antidepressants", "Steroids", "Insulin"],
+      "correct_treatment": 0
+    }
+  ]
+}
