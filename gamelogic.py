@@ -11,6 +11,7 @@ class Game:
         pygame.display.set_caption("Diagnose Detective")
         self.clock = pygame.time.Clock()
         self.active_scene = MenuScene(self)
+        self.level = None
 
     def run(self):
         while True:

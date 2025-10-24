@@ -53,7 +53,7 @@ class GameScene(Scene):
             else:
                 self.game.change_scene(lambda game: FailScene(game, self.score, self.total_cases))
             return
-        self.patient = Patient()
+        self.patient = Patient(self.game.level)
         self.stage = 'disease'
         self.selected_option = None
         self.selected_treatment = None
@@ -143,4 +143,3 @@ class GameScene(Scene):
         for i, line in enumerate(lines):
             instr_surf = self.font.render(line, True, (60, 60, 60))
             screen.blit(instr_surf, (300, 200 + i * line_spacing))
-# ...existing code...
