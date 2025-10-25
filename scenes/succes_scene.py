@@ -8,22 +8,43 @@ class SuccessScene(Scene):
         super().__init__(game, background_image=pygame.image.load('images/happy_ending.png'))
         self.score = score
         self.total_cases = total_cases
-        self.button = Button("Back to Menu", SCREEN_WIDTH//2, SCREEN_HEIGHT//2 + 80, self.back_to_menu)
+        self.menu_button = Button("Back to Menu", SCREEN_WIDTH//8 * 5, SCREEN_HEIGHT//2 + 100, self.back_to_menu)
+        self.retry_button = Button("Retry", SCREEN_WIDTH//8 * 5, SCREEN_HEIGHT//2 + 40, self.retry_game)
+        if self.game.level != "hard":
+            self.next_level_button = Button("Next Level", SCREEN_WIDTH//8 * 5, SCREEN_HEIGHT//2 + 160, self.next_level)
 
     def back_to_menu(self):
         from scenes.menu_scene import MenuScene
         self.game.change_scene(MenuScene)
+    
+    def retry_game(self):
+        from scenes.game_scene import GameScene
+        self.game.change_scene(GameScene)
+    
+    def next_level(self):
+        from scenes.game_scene import GameScene
+        if self.game.level == "easy":
+            self.game.level = "medium"
+        elif self.game.level == "medium":
+            self.game.level = "hard"
+        self.game.change_scene(GameScene)
 
     def handle_events(self, events):
         for event in events:
-            self.button.handle_event(event)
+            self.menu_button.handle_event(event)
+            self.retry_button.handle_event(event)
+            if self.game.level != "hard":
+                self.next_level_button.handle_event(event)
 
     def update(self, dt):
         pass
 
     def render(self, screen):
         super().render(screen)
-        text_surface = self.font.render(f'You scores {self.score}/{self.total_cases}!', True, BLACK)
-        text_rect = text_surface.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2 - 40))
+        text_surface = self.font.render(f'You scored: {self.score}/{self.total_cases}!', True, BLACK)
+        text_rect = text_surface.get_rect(center=(SCREEN_WIDTH//8 * 5, SCREEN_HEIGHT//2 - 40))
         screen.blit(text_surface, text_rect)
-        self.button.draw(screen)
+        self.menu_button.draw(screen)
+        self.retry_button.draw(screen)
+        if self.game.level != "hard":
+            self.next_level_button.draw(screen)

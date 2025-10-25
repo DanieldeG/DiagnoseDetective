@@ -4,7 +4,7 @@ import json
 import os
 
 class Patient:
-    def __init__(self, level, dataset_path=None):
+    def __init__(self, level, completed_cases = [], dataset_path=None):
         # Default path: project-root/data/data.json
         if dataset_path is None:
             dataset_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'data.json')
@@ -14,12 +14,18 @@ class Patient:
             self.data = json.load(file)
 
         # Prepare the first case
+        self.completed_cases = completed_cases
         self.level = level
         self.generate_case()
 
     def generate_case(self):
         # Choose a random case from the loaded JSON list
         case = random.choice(self.data[self.level])
+
+        # Keep choosing until we find a case not in completed_cases
+        while case in self.completed_cases:
+            case = random.choice(self.data[self.level])
+
         self.raw_case = case
 
         # Symptoms are stored as a list in the JSON

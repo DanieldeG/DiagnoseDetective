@@ -43,6 +43,7 @@ class GameScene(Scene):
         self.score = 0
         self.case_count = 0
         self.total_cases = 10
+        self.completed_cases = []
         self._prepare_new_patient()
         self.speech_bubble = SpeechBubble(350, 60, 350, 120, self.small_font)
 
@@ -53,7 +54,8 @@ class GameScene(Scene):
             else:
                 self.game.change_scene(lambda game: FailScene(game, self.score, self.total_cases))
             return
-        self.patient = Patient(self.game.level)
+        self.patient = Patient(self.game.level, completed_cases=self.completed_cases)
+        self.completed_cases.append(self.patient.raw_case)
         self.stage = 'disease'
         self.selected_option = None
         self.selected_treatment = None
