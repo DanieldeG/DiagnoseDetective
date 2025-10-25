@@ -1,4 +1,3 @@
-# scenes/game_scene.py
 import pygame
 from scenes.base_scene import Scene
 from settings import *
@@ -9,51 +8,85 @@ from scenes.succes_scene import SuccessScene
 
 class SpeechBubble:
     def __init__(self, x, y, width, height, font):
-        self.rect = pygame.Rect(x, y, width, height)
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
         self.font = font
-        self.bg_color = (240, 240, 255)
-        self.border_color = (180, 180, 220)
         self.text_color = (40, 40, 80)
 
     def draw(self, screen, text):
-        wrapped = self.wrap_text(text, self.font, self.rect.width - 20)
-        for i, line in enumerate(wrapped):
-            text_surface = self.font.render(line, True, self.text_color)
-            screen.blit(text_surface, (self.rect.x + 10, self.rect.y + 15 + i * (SMALL_FONT_SIZE + 2)))
+        lines = self.wrap_text(text, self.font, self.width - 16)
+        line_height = self.font.get_linesize()
+        top_padding = 45
+        for i, line in enumerate(lines):
+            surf = self.font.render(line, True, self.text_color)
+            screen.blit(surf, (self.x + 8, self.y + top_padding + i * (line_height + 2)))
 
     def wrap_text(self, text, font, max_width):
         words = text.split(' ')
         lines = []
-        current = ''
-        for word in words:
-            test = current + word + ' '
+        cur = ''
+        for w in words:
+            test = (cur + ' ' + w).strip()
             if font.size(test)[0] <= max_width:
-                current = test
+                cur = test
             else:
-                lines.append(current.strip())
-                current = word + ' '
-        if current:
-            lines.append(current.strip())
+                if cur:
+                    lines.append(cur)
+                cur = w
+        if cur:
+            lines.append(cur)
         return lines
 
 class GameScene(Scene):
-    def __init__(self, game):
-        super().__init__(game, background_image=pygame.image.load('images/patient_background.png'))
-        self.buttons = []
-        self.score = 0
-        self.case_count = 0
+    def __init__(self, game, difficulty=None):
+        # safe background load
+        try:
+            bg = pygame.image.load('images/patient_background.png')
+        except Exception:
+            bg = None
+        super().__init__(game, background_image=bg)
+        self.game = game
+        # total / passing rules
         self.total_cases = 10
+        self.required_to_pass = 7
+
+        # score and progress
+        self.case_count = 0
+        self.score = 0
+
+        # difficulty resolution: param -> game.level -> 'medium'
+        self.difficulty = difficulty or getattr(game, 'level', 'medium')
+
+        # UI state
+        self.stage = 'disease'
+        self.selected_option = None
+        self.selected_treatment = None
+        self.buttons = []
+        self.speech_bubble = SpeechBubble(320, 40, 400, 120, getattr(self, 'small_font', self.font))
+
+        # prepare first patient
         self._prepare_new_patient()
-        self.speech_bubble = SpeechBubble(350, 60, 350, 120, self.small_font)
 
     def _prepare_new_patient(self):
+        # end-of-exam check
         if self.case_count >= self.total_cases:
-            if self.score >= 7:
-                self.game.change_scene(lambda game: SuccessScene(game, self.score, self.total_cases))
+            if self.score >= self.required_to_pass:
+                self.game.change_scene(lambda g: SuccessScene(g, self.score, self.total_cases, difficulty=self.difficulty))
             else:
-                self.game.change_scene(lambda game: FailScene(game, self.score, self.total_cases))
+                self.game.change_scene(lambda g: FailScene(g, self.score, self.total_cases, difficulty=self.difficulty))
             return
-        self.patient = Patient(self.game.level)
+
+        # create patient (try passing difficulty if Patient supports it)
+        try:
+            self.patient = Patient(difficulty=self.difficulty)
+        except TypeError:
+            try:
+                self.patient = Patient(self.difficulty)
+            except Exception:
+                self.patient = Patient()
+
         self.stage = 'disease'
         self.selected_option = None
         self.selected_treatment = None
@@ -61,20 +94,29 @@ class GameScene(Scene):
 
     def create_buttons(self):
         self.buttons = []
-        start_x = SCREEN_WIDTH // 2
-        start_y = 300
         button_w = 320
-        button_h = 50
-        gap = 18
-        options = self.patient.options if self.stage == 'disease' else self.patient.get_treatment_options()
-        for idx, option in enumerate(options):
-            def make_callback(i=idx):
+        button_h = 48
+        gap = 14
+        start_x = 400
+        start_y = 300
+
+        if self.stage == 'disease':
+            options = getattr(self.patient, 'options', ["No options"])
+        else:
+            # try method then fallback attribute
+            try:
+                options = self.patient.get_treatment_options()
+            except Exception:
+                options = getattr(self.patient, 'treatments', ["No treatments"])
+
+        for idx, opt in enumerate(options):
+            def make_cb(i=idx):
                 return lambda: self.select_option(i)
             btn = Button(
-                text=option,
+                text=str(opt),
                 x=start_x + button_w // 2,
                 y=start_y + idx * (button_h + gap),
-                callback=make_callback(),
+                callback=make_cb(),
                 width=button_w,
                 height=button_h
             )
@@ -83,7 +125,12 @@ class GameScene(Scene):
     def select_option(self, idx):
         if self.stage == 'disease':
             self.selected_option = idx
-            if self.patient.check_disease_choice(idx):
+            ok = False
+            try:
+                ok = self.patient.check_disease_choice(idx)
+            except Exception:
+                ok = False
+            if ok:
                 self.stage = 'treatment'
                 self.selected_option = None
                 self.create_buttons()
@@ -92,7 +139,8 @@ class GameScene(Scene):
                 self._prepare_new_patient()
         elif self.stage == 'treatment':
             self.selected_treatment = idx
-            if idx == self.patient.correct_treatment_index:
+            correct_idx = getattr(self.patient, 'correct_treatment_index', 0)
+            if idx == correct_idx:
                 self.score += 1
             self.case_count += 1
             self._prepare_new_patient()
@@ -108,38 +156,37 @@ class GameScene(Scene):
     def render(self, screen):
         super().render(screen)
 
-        # Draw the score
-        score_text = self.font.render(f"Score: {self.score}", True, (60, 60, 60))
-        screen.blit(score_text, (SCREEN_WIDTH - 150, 20))
+        # score / progress / difficulty
+        score_surf = self.font.render(f"Score: {self.score}", True, (60,60,60))
+        screen.blit(score_surf, (SCREEN_WIDTH - score_surf.get_width() - 16, 16))
 
-        # Draw the case number
-        case_text = self.font.render(f"Case: {self.case_count + 1}/{self.total_cases}", True, (60, 60, 60))
-        screen.blit(case_text, (20, 20))
+        case_surf = self.font.render(f"Case: {min(self.case_count + 1, self.total_cases)}/{self.total_cases}", True, (60,60,60))
+        screen.blit(case_surf, (16, 16))
 
-        # Draw speech bubble for symptoms
-        symptoms_text = "I am feeling: " + ", ".join(self.patient.symptoms)
+        diff_surf = self.font.render(f"Difficulty: {self.difficulty.title()}", True, (60,60,60))
+        screen.blit(diff_surf, (16, 44))
+
+        # symptoms
+        symptoms = getattr(self.patient, 'symptoms', ["No symptoms"])
+        symptoms_text = "I am feeling: " + ", ".join(symptoms)
         self.speech_bubble.draw(screen, symptoms_text)
 
-        # Draw options as buttons
-        for idx, btn in enumerate(self.buttons):
+        # buttons
+        for i, btn in enumerate(self.buttons):
             if self.stage == 'disease':
-                btn.color = (180, 220, 180) if self.selected_option == idx else BLUE
+                btn.color = (180, 220, 180) if self.selected_option == i else BLUE
             else:
-                btn.color = (180, 180, 220) if self.selected_treatment == idx else GREEN
+                btn.color = (180, 180, 220) if self.selected_treatment == i else GREEN
             btn.draw(screen)
 
-        # Instructions
+        # two-line instructions
         if self.stage == 'disease':
-            lines = [
-                "Click on the disease you think",
-                "matches the patient's symptoms!"
-            ]
+            lines = ["Click on the disease you think", "matches the patient's symptoms!"]
         else:
-            lines = [
-                "Now choose the best treatment",
-                "for this patient!"
-            ]
+            lines = ["Now choose the best treatment", "for this patient!"]
         line_spacing = self.font.get_linesize() + 4
+        instr_x = 300
+        instr_y = 200
         for i, line in enumerate(lines):
-            instr_surf = self.font.render(line, True, (60, 60, 60))
-            screen.blit(instr_surf, (300, 200 + i * line_spacing))
+            surf = self.font.render(line, True, (60,60,60))
+            screen.blit(surf, (instr_x, instr_y + i * line_spacing))
