@@ -7,8 +7,10 @@ from ui.button import Button
 from scenes.fail_scene import FailScene
 from scenes.succes_scene import SuccessScene
 
+# Layout and rendering of speech bubble
 class SpeechBubble:
     def __init__(self, x, y, width, height, font):
+        """Initialize a speech bubble at (x, y) with given width and height."""
         self.rect = pygame.Rect(x, y, width, height)
         self.font = font
         self.bg_color = (240, 240, 255)
@@ -16,12 +18,14 @@ class SpeechBubble:
         self.text_color = (40, 40, 80)
 
     def draw(self, screen, text):
+        """Draw the speech bubble with the given text."""
         wrapped = self.wrap_text(text, self.font, self.rect.width - 20)
         for i, line in enumerate(wrapped):
             text_surface = self.font.render(line, True, self.text_color)
             screen.blit(text_surface, (self.rect.x + 10, self.rect.y + 15 + i * (SMALL_FONT_SIZE + 2)))
 
     def wrap_text(self, text, font, max_width):
+        """Wrap text to fit within max_width."""
         words = text.split(' ')
         lines = []
         current = ''
@@ -36,8 +40,10 @@ class SpeechBubble:
             lines.append(current.strip())
         return lines
 
+
 class GameScene(Scene):
     def __init__(self, game):
+        """Initialize the main game scene."""
         super().__init__(game, background_image=pygame.image.load('images/patient_background.png'))
         self.buttons = []
         self.score = 0
@@ -48,6 +54,7 @@ class GameScene(Scene):
         self.speech_bubble = SpeechBubble(350, 60, 350, 120, self.small_font)
 
     def _prepare_new_patient(self):
+        """Set up a new patient or end the game if all cases are done."""
         if self.case_count >= self.total_cases:
             if self.score >= 7:
                 self.game.change_scene(lambda game: SuccessScene(game, self.score, self.total_cases))
@@ -62,6 +69,7 @@ class GameScene(Scene):
         self.create_buttons()
 
     def create_buttons(self):
+        """Create buttons for current stage (disease selection or treatment selection)."""
         self.buttons = []
         start_x = SCREEN_WIDTH // 2
         start_y = 300
@@ -83,6 +91,7 @@ class GameScene(Scene):
             self.buttons.append(btn)
 
     def select_option(self, idx):
+        """Handle selection of an option based on current stage."""
         if self.stage == 'disease':
             self.selected_option = idx
             if self.patient.check_disease_choice(idx):
@@ -100,6 +109,7 @@ class GameScene(Scene):
             self._prepare_new_patient()
 
     def handle_events(self, events):
+        """Handle events for the game scene."""
         for event in events:
             for btn in self.buttons:
                 btn.handle_event(event)
