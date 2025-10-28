@@ -4,105 +4,105 @@
       "symptoms": ["Runny nose", "Sneezing", "Mild sore throat", "Cough"],
       "diseases": ["Common Cold", "Allergies", "Flu", "Sinus Infection"],
       "correct_disease": 0,
-      "treatments": ["Rest and fluids", "Antihistamines", "Antivirals", "Antibiotics"],
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
       "correct_treatment": 0
     },
     {
       "symptoms": ["Mild fever", "Itchy rash", "Fatigue", "Loss of appetite"],
-      "diseases": ["Chickenpox", "Measles", "Shingles", "Eczema"],
+      "diseases": ["Chickenpox", "Ear infection", "Lactose Intolerance", "Eczema"],
       "correct_disease": 0,
-      "treatments": ["Antihistamines", "Calamine lotion and rest", "Antibiotics", "Steroid cream"],
-      "correct_treatment": 1
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 0
     },
     {
       "symptoms": ["Toothache", "Swelling in jaw", "Pain while chewing"],
       "diseases": ["Cavity", "Gum Infection", "Tooth abscess", "Sinus Infection"],
       "correct_disease": 2,
-      "treatments": ["Antibiotics and drainage", "Painkillers", "Saltwater rinse", "Surgery"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 2
     },
     {
       "symptoms": ["Itchy, red eyes", "Watery discharge", "Gritty feeling in eyes"],
-      "diseases": ["Conjunctivitis", "Allergic reaction", "Dry eye syndrome", "Blepharitis"],
+      "diseases": ["Conjunctivitis", "Allergic reaction", "Pharyngitis", "Athlete’s foot"],
       "correct_disease": 0,
-      "treatments": ["Antibiotic drops", "Cold compress", "Lubricant drops", "Antihistamine drops"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 1
     },
     {
       "symptoms": ["Sore throat", "Difficulty swallowing", "Mild fever"],
       "diseases": ["Pharyngitis", "Laryngitis", "Tonsillitis", "Common Cold"],
       "correct_disease": 2,
-      "treatments": ["Saltwater gargle", "Antibiotics", "Pain relief", "Rest"],
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
       "correct_treatment": 1
     },
     {
       "symptoms": ["Nausea", "Vomiting", "Stomach pain", "Diarrhea"],
       "diseases": ["Food Poisoning", "Gastritis", "Ulcer", "Appendicitis"],
       "correct_disease": 0,
-      "treatments": ["Hydration and rest", "Antibiotics", "Surgery", "Antacids"],
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
       "correct_treatment": 0
     },
     {
       "symptoms": ["Cough", "Runny nose", "Mild fever", "Fatigue"],
       "diseases": ["Flu", "Common Cold", "Bronchitis", "Allergies"],
       "correct_disease": 1,
-      "treatments": ["Rest and fluids", "Antibiotics", "Inhaler", "Antivirals"],
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
       "correct_treatment": 0
     },
     {
       "symptoms": ["Headache", "Pressure in forehead", "Nasal congestion"],
       "diseases": ["Migraine", "Sinusitis", "Tension headache", "Flu"],
       "correct_disease": 1,
-      "treatments": ["Decongestants", "Painkillers", "Antibiotics", "Antihistamines"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 1
     },
     {
       "symptoms": ["Ear pain", "Fever", "Hearing difficulty"],
       "diseases": ["Ear infection", "Tinnitus", "Sinus infection", "Allergy"],
       "correct_disease": 0,
-      "treatments": ["Antibiotic drops", "Antihistamines", "Painkillers", "Steroid spray"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 1
     },
     {
       "symptoms": ["Burning sensation while urinating", "Lower abdominal pain"],
       "diseases": ["Kidney stones", "Bladder infection", "UTI", "Appendicitis"],
       "correct_disease": 2,
-      "treatments": ["Antibiotics", "Painkillers", "Surgery", "Hydration only"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 1
     },
     {
       "symptoms": ["Itchy scalp", "Flakes on hair", "Mild redness"],
       "diseases": ["Dandruff", "Psoriasis", "Eczema", "Lice infestation"],
       "correct_disease": 0,
-      "treatments": ["Medicated shampoo", "Steroid cream", "Antihistamines", "Antibiotics"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 1
     },
     {
       "symptoms": ["Pain when swallowing", "Hoarse voice", "Dry throat"],
-      "diseases": ["Laryngitis", "Pharyngitis", "Tonsillitis", "Cold"],
+      "diseases": ["Laryngitis", "lung intection", "Tonsillitis", "Cold"],
       "correct_disease": 0,
-      "treatments": ["Voice rest", "Warm fluids", "Antibiotics", "Steroids"],
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
       "correct_treatment": 0
     },
     {
       "symptoms": ["Sneezing", "Itchy nose", "Watery eyes", "Runny nose"],
       "diseases": ["Allergic rhinitis", "Common Cold", "Sinusitis", "Flu"],
       "correct_disease": 0,
-      "treatments": ["Antihistamines", "Decongestants", "Antibiotics", "Steroids"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 1
     },
     {
       "symptoms": ["Rash between toes", "Itching", "Flaking skin"],
       "diseases": ["Athlete’s foot", "Eczema", "Psoriasis", "Cellulitis"],
       "correct_disease": 0,
-      "treatments": ["Antifungal cream", "Steroid cream", "Antibiotics", "Moisturizer"],
-      "correct_treatment": 0
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
+      "correct_treatment": 1
     },
     {
       "symptoms": ["Cough", "Sore throat", "Hoarse voice"],
-      "diseases": ["Laryngitis", "Bronchitis", "Cold", "Asthma"],
+      "diseases": ["Laryngitis", "Eczema", "Cold", "Asthma"],
       "correct_disease": 0,
-      "treatments": ["Voice rest", "Warm fluids", "Antibiotics", "Inhaler"],
+      "treatments": ["Rest", "medication", "therapy", "surgery"],
       "correct_treatment": 0
     }
   ],
