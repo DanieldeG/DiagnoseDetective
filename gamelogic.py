@@ -3,9 +3,10 @@ import sys
 from settings import *
 from scenes.menu_scene import MenuScene
 from scenes.game_scene import GameScene
-
+# Main game logic and loop
 class Game:
     def __init__(self):
+        """Initialize the game."""
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("Diagnose Detective")
@@ -14,6 +15,7 @@ class Game:
         self.level = None
 
     def run(self):
+        """Main game loop."""
         while True:
             dt = self.clock.tick(FPS) / 1000  # Delta time for frame-independent movement
             events = pygame.event.get()
