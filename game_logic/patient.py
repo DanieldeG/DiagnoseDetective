@@ -5,6 +5,8 @@ import os
 
 class Patient:
     def __init__(self, level, completed_cases = [], dataset_path=None):
+        """Initialize a Patient instance by loading case data from a JSON file."""
+
         # Default path: project-root/data/data.json
         if dataset_path is None:
             dataset_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'data.json')
@@ -19,6 +21,7 @@ class Patient:
         self.generate_case()
 
     def generate_case(self):
+        """Generate a new patient case, ensuring it hasn't been completed before."""
         # Choose a random case from the loaded JSON list
         case = random.choice(self.data[self.level])
 
@@ -51,6 +54,7 @@ class Patient:
                 self.correct_option = self.options.index(correct_name)
 
     def get_correct_disease_name(self):
+        """Return the name of the correct disease."""
         if isinstance(self.correct_disease_index, int) and 0 <= self.correct_disease_index < len(self.diseases):
             return self.diseases[self.correct_disease_index]
         return None
@@ -60,9 +64,11 @@ class Patient:
         return self.correct_option is not None and choice_index == self.correct_option
 
     def get_treatment_options(self):
+        """Return the list of treatment options for the patient."""
         return self.treatments.copy()
 
     def get_correct_treatment_name(self):
+        """Return the name of the correct treatment."""
         if isinstance(self.correct_treatment_index, int) and 0 <= self.correct_treatment_index < len(self.treatments):
             return self.treatments[self.correct_treatment_index]
         return None

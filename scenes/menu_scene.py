@@ -8,6 +8,7 @@ from scenes.game_scene import GameScene
 
 class MenuScene(Scene):
     def __init__(self, game):
+        """Initialize the main menu scene."""
         super().__init__(game, background_image=pygame.image.load('images/main_menu_background.png'))
         self.title = self.font.render("Diagnose Detective", True, BLACK)
         self.title_rect = self.title.get_rect(center=(SCREEN_WIDTH//2, 30))
@@ -21,13 +22,16 @@ class MenuScene(Scene):
         self.exit_button = Button("Exit", SCREEN_WIDTH//4 * 3, SCREEN_HEIGHT//8 * 4, self.exit_game, color=RED)
 
     def start_game(self, level):
+        """Start the game at the selected difficulty level."""
         self.game.level = level
         self.game.change_scene(GameScene)
     
     def exit_game(self):
+        """Exit the game."""
         pygame.event.post(pygame.event.Event(pygame.QUIT))
 
     def show_levels(self):
+        """Display level selection buttons."""
         self.start_button.active = False
         self.exit_button.active = False
         for btn in self.level_buttons:
@@ -35,6 +39,9 @@ class MenuScene(Scene):
         self.mode = "level_select"
 
     def handle_events(self, events):
+        """Handle input events for the menu scene."""
+
+        # Route based on current mode
         for event in events:
             if self.mode == "main":
                 self.start_button.handle_event(event)
@@ -47,6 +54,7 @@ class MenuScene(Scene):
         pass
 
     def render(self, screen):
+        """Render all objects in the menu scene."""
         super().render(screen)
         screen.blit(self.title, self.title_rect)
         if self.mode == "level_select":

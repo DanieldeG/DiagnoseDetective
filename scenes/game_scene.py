@@ -19,6 +19,8 @@ class SpeechBubble:
 
     def draw(self, screen, text):
         """Draw the speech bubble with the given text."""
+
+        # Wrap text to fit within the bubble
         wrapped = self.wrap_text(text, self.font, self.rect.width - 20)
         for i, line in enumerate(wrapped):
             text_surface = self.font.render(line, True, self.text_color)
@@ -29,6 +31,8 @@ class SpeechBubble:
         words = text.split(' ')
         lines = []
         current = ''
+
+        # Wrap words into lines based on max width and font size
         for word in words:
             test = current + word + ' '
             if font.size(test)[0] <= max_width:
@@ -55,12 +59,17 @@ class GameScene(Scene):
 
     def _prepare_new_patient(self):
         """Set up a new patient or end the game if all cases are done."""
+
+        # Check if all cases are completed
         if self.case_count >= self.total_cases:
+            # Determine success or failure based on score
             if self.score >= 7:
                 self.game.change_scene(lambda game: SuccessScene(game, self.score, self.total_cases))
             else:
                 self.game.change_scene(lambda game: FailScene(game, self.score, self.total_cases))
             return
+        
+        # Initialize new patient
         self.patient = Patient(self.game.level, completed_cases=self.completed_cases)
         self.completed_cases.append(self.patient.raw_case)
         self.stage = 'disease'
@@ -76,6 +85,8 @@ class GameScene(Scene):
         button_w = 320
         button_h = 50
         gap = 18
+
+        # Create buttons based on current stage
         options = self.patient.options if self.stage == 'disease' else self.patient.get_treatment_options()
         for idx, option in enumerate(options):
             def make_callback(i=idx):
@@ -118,6 +129,7 @@ class GameScene(Scene):
         pass
 
     def render(self, screen):
+        """"Render all objects in the game scene."""
         super().render(screen)
 
         # Draw the score
